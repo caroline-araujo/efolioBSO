@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
     wargs->len = i == nt - 1 ? filesize - i * block_size : block_size;
     wargs->freq = freqs[i];
     wargs->task_id = i;
-    pthread_create(&threads[i], NULL, (void ()(void *))worker, wargs);
+    pthread_create(&threads[i], NULL, (void *(*)(void *))worker, wargs);
     }
 
     // esperar pelas threads trabalhadoras terminarem
