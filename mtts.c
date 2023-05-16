@@ -22,8 +22,6 @@ struct worker_args {
 };
 
 int freq[ALPHABET_SIZE] = {0};
-int freqs[nt][ALPHABET_SIZE]; // vetor de frequências por thread
-pthread_t threads[nt];
 size_t total_len;
 
 void *worker(void *arg) {
@@ -61,6 +59,9 @@ int main(int argc, char *argv[]) {
     int nt = atoi(argv[1]);
     int nc = atoi(argv[2]);
     char *filename = argv[3];
+
+    int freqs[nt][ALPHABET_SIZE]; // vetor de frequências por thread
+    pthread_t threads[nt];
 
     if (nt < 1 || nc < 1) {
         fprintf(stderr, "nt e nc devem ser maiores ou iguais a 1.\n");
