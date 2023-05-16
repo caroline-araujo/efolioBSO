@@ -22,6 +22,8 @@ struct worker_args {
 };
 
 int freq[ALPHABET_SIZE] = {0};
+int freqs[nt][ALPHABET_SIZE]; // vetor de frequências por thread
+pthread_t threads[nt];
 size_t total_len;
 
 void *worker(void *arg) {
@@ -95,8 +97,6 @@ int main(int argc, char *argv[]) {
     printf("Relatório de tarefas:\n");
 
     // criar threads trabalhadoras
-    pthread_t threads[nt];
-    int freqs[nt][26]; // vetor de frequências por thread
     size_t block_size = nc;
     for (int i = 0; i < nt; i++) {
     struct worker_args *wargs = malloc(sizeof(struct worker_args));
